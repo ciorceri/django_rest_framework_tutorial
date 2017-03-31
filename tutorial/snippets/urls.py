@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from tutorial.snippets import views
+from snippets import views
 
 urlpatterns = [
     url(r'^snippets/$', views.snippet_list),
