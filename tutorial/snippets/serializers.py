@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from tutorial.snippets.models import LANGUAGE_CHOICES, STYLE_CHOICES, Snippet
+from .models import LANGUAGE_CHOICES, STYLE_CHOICES, Snippet
 
 
 class SnippetSerializer(serializers.Serializer):
@@ -10,7 +9,7 @@ class SnippetSerializer(serializers.Serializer):
     code = serializers.CharField(style={'base_template': 'textarea.html'})
     linenos = serializers.BooleanField(required=False)
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
-    style = serializers.CharField(choices=STYLE_CHOICES, default='friendly')
+    style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
 
     def create(self, validated_data):
         """
@@ -29,7 +28,7 @@ class SnippetSerializer(serializers.Serializer):
         """
         instance.title = validated_data.get('title', instance.title)
         instance.code = validated_data.get('code', instance.code)
-        instance.lineos = validated_data.get('lineos', instance.lineos)
+        instance.linenos = validated_data.get('lineos', instance.linenos)
         instance.language = validated_data.get('language', instance.language)
         instance.style = validated_data.get('style', instance.style)
         instance.save()
