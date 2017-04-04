@@ -7,10 +7,11 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from tutorial.snippets.models import Snippet
-from tutorial.snippets.serializers import SnippetSerializer
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
 
 # Create your views here.
+
 
 @api_view(['GET', 'POST'])
 def snippet_list(request, format=None):
@@ -30,8 +31,8 @@ def snippet_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'POST'])
-def snippet_detail(request, pk):
+@api_view(['GET', 'PUT', 'DELETE'])
+def snippet_detail(request, pk, format=None):
     """
     Retrieve, update or delete a snippet instance.
     """
